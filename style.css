@@ -1,0 +1,48 @@
+body{
+    background-color: rgb(71, 182, 71);
+}
+
+#WebsiteHeader{
+    text-align: center;
+    color: chocolate;
+ 
+}
+
+.nav{
+align-items: center;
+font-size: large;
+text-decoration-line: none;
+margin-right: 3%;
+
+} 
+
+.navig{
+    margin-left: 35%;
+   
+}
+
+.login{
+float: left;
+margin-left: 38%;
+background-color: rgb(83, 227, 247);
+padding-left: 1%;
+padding-right: 1%;
+}
+
+
+
+#login{
+    margin: 5% 40% 10% 40%
+}
+#RegisterLabel{
+    float: left;
+    margin-left: 38%;
+    background-color: rgb(52, 133, 136);
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-bottom: 2%;
+}
+
+.RegisterField{
+    margin-bottom: 2%;
+}
