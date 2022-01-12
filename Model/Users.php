@@ -60,19 +60,22 @@ class Users
         $sql = "SELECT id, username, role FROM Users";
         $result = $conn->query($sql);
         $users = $result->fetch_all(MYSQLI_ASSOC);
-        foreach($users as $value){
+        foreach ($users as $value){
             $id = $value['id'];
             $username = $value['username'];
             $role = $value['role'];
-            echo "<tr>";
-            echo    "<td> $id </td>";
-            echo    "<td> $username </td>";
-            echo    "<td> $role </td>";
-            echo    "<td><a href ='/user/edit/$id'>edit</a></td>";
-            if ($access=="administrator") { echo    "<td><a href ='/user/delete/$id'>delete</a></td>";}
-            else {echo "<td><button disabled>delete</button></td>";}
-            echo "</tr>";
+            echo  "
+                    <tr>
+                    <td> $id </td>
+                    <td> $username </td>
+                    <td> $role   </td>
+                    <td><a href='/user/edit/$id'>edit</a></td>";
+            if ($access=='administrator') { echo "<td><a href ='/user/delete/$id'> delete</a></td> </tr>"; }
+            else { echo "<td><button disabled>delete</button></td> </tr>"; }
+
+
         }
+
     }
 
     protected function delete($id){
@@ -89,10 +92,8 @@ class Users
     protected function edit($id, $field, $value){
         $conn = $this->DBconnect();
         $sql = "UPDATE Users SET $field='$value' WHERE id='$id'";
-        if ($conn->query($sql) === TRUE) {
-            echo "<script type='text/javascript'> alert('Record Updated successfully'); window.location.href = '../../adminpanel'; </script>";
-        } else {
-            echo "Error Updating record: " . $conn->error;
+        if ($conn->query($sql) !== TRUE) {
+             echo "Error Updating record: " . $conn->error;
         }
         $conn->close();
     }

@@ -48,15 +48,31 @@ class UserController extends Users
 
         $this->delete($id);
     }
-    public function edituser($id){
-//
-//        $username = javascriptidan mova
-//        $password = esec
-//        $rptpassword = esec
-        if (isset($username)){
-        $this->edit($id,"username",$username);}
-        if (isset($password) && $password==$rptpassword){
-            $this->edit($id, "password", $password);
+
+
+
+    public function edituser($id)
+    {
+
+        $username = $_POST['user'];
+        $password = $_POST['pass'];
+        $rptpassword = $_POST['rptpass'];
+
+        if (!empty($username)){
+        $this->edit($id,"username",$username);
         }
+        if (!empty($password)){
+            if ($password==$rptpassword) {
+                $this->edit($id, "password", $password);
+                echo "<script type='text/javascript'> alert('Record Updated!'); window.location.href = '/adminpanel'; </script>";
+            } else {
+                echo "<script type='text/javascript'> alert('passwords dont match'); window.location.href = '/adminpanel'; </script>";
+            }
+        }
+        if (!empty($username) || !empty($password) ) {
+            echo "<script type='text/javascript'> alert('Record Updated!'); window.location.href = '/adminpanel'; </script>";
+        }
+        else {  echo "<script type='text/javascript'> alert('Nothing Changed!'); window.location.href = '/adminpanel'; </script>"; }
     }
+
 }

@@ -2,7 +2,7 @@
 include_once "/home/davitgabashvili/Projects/lesson1/Portal_OOP/Controller/UserController.php";
 class blogController extends Session
 {
-    private function render($filename){
+    private function render($filename,$data = []){
         include __ROOT__."/View/".$filename.".php";
     }
 
@@ -44,6 +44,13 @@ class blogController extends Session
     public function registerView(){
         $this->sessionCheck("login");
         $this->render("register");
+    }
+
+    public function editform($id){
+        $this->sessionCheck("adminpanel");
+        define("id", $id);
+        $this->render("edit");
+
     }
 
 }

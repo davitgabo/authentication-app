@@ -33,6 +33,7 @@ include_once "/home/davitgabashvili/Projects/lesson1/Portal_OOP/Model/Users.php"
                 $obj->adminpanel($_COOKIE['Role']);
                 ?>
 
+
             </table>
 
 
@@ -47,4 +48,5 @@ include_once "/home/davitgabashvili/Projects/lesson1/Portal_OOP/Model/Users.php"
 
         </footer>
     </body>
+</html>
 

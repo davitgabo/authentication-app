@@ -15,3 +15,5 @@ $router->route("/logout","UserController","logout");
 $router->route("/adminpanel","BlogController","adminPanel");
 $router->route("/manager","BlogController","manager");
 $router->route("/user/delete/{id}","UserController","deleteuser");
+$router->route("/user/edit/{id}","BlogController","editform");
+$router->route("/adminpanel/edit/{id}","UserController","edituser");
