@@ -6,47 +6,56 @@ class blogController extends Session
         include __ROOT__."/View/".$filename.".php";
     }
 
-    public function adminPanel(){
+    public function adminPanel()
+    {
         $this->sessionCheck("adminpanel");
         $this->render("adminpanel");
     }
 
-    public function managerPanel(){
+    public function managerPanel()
+    {
         $this->sessionCheck("adminpanel");
         $this->render("adminpanel");
     }
 
-    public function home(){
+    public function home()
+    {
         $this->sessionCheck("home");
         $this->render("home");
     }
 
-    public function about(){
+    public function about()
+    {
         $this->sessionCheck("about");
         $this->render("about");
     }
 
-    public function contact(){
+    public function contact()
+    {
         $this->sessionCheck("contact");
         $this->render("contact");
     }
 
-    public function gallery(){
+    public function gallery()
+    {
         $this->sessionCheck("gallery");
         $this->render("gallery");
     }
 
-    public function loginView(){
+    public function loginView()
+    {
         $this->sessionCheck("login");
         $this->render("login");
     }
 
-    public function registerView(){
+    public function registerView()
+    {
         $this->sessionCheck("login");
         $this->render("register");
     }
 
-    public function editform($id){
+    public function editform($id)
+    {
         $this->sessionCheck("adminpanel");
         define("id", $id);
         $this->render("edit");

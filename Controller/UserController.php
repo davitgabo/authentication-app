@@ -37,27 +37,30 @@ class UserController extends Users
         }
     }
 
-    public function fullLog(){
+    public function fullLog()
+    {
         $this->login($_POST['username'],$_POST['password']);
     }
-    public function fullReg(){
+
+    public function fullReg()
+    {
         $this->reg($_POST['uname'],$_POST['psw'],$_POST['rptpsw']);
     }
 
-    public function deleteuser($id){
-
+    public function deleteUser($id)
+    {
         $this->delete($id);
     }
 
 
 
-    public function edituser($id)
+    public function editUser($id)
     {
-        $username = $_POST['user'];
-        $password = $_POST['pass'];
-        $rptpassword = $_POST['rptpass'];
+        $username = trim($_POST['user']);
+        $password = trim($_POST['pass']);
+        $rptpassword = trim($_POST['rptpass']);
 
-        if (!empty($username)){
+        if (!empty($username) ){
             $this->edit($id,"username",$username);
             $alert = "Username Updated! ";
         }
@@ -77,7 +80,7 @@ class UserController extends Users
         }
         else {$alert .="No Updates in Password!"; }
 
-            echo "<script type='text/javascript'> alert('$alert'); window.location.href = '/adminpanel'; </script>";
+        echo "<script type='text/javascript'> alert('$alert'); window.location.href = '/adminpanel'; </script>";
     }
 
 

@@ -1,97 +1,113 @@
 <?php
-include_once "/home/davitgabashvili/Projects/lesson1/Portal_OOP/Model/DBconnection.php";
 class Users
 {
     private $host = "localhost";
     private $username = "root";
     private $password = "Password123!";
     private $DBname = "Project_OKI";
-    protected function DBconnect(){
+
+    protected function dataBaseConnect()
+    {
         $conn = new mysqli($this->host, $this->username, $this->password, $this->DBname);
+
         if ($conn->connect_error){
             echo "Failed to connect to MySQL: " . $conn -> connect_error;
             exit();
-        }
-        else {
+        } else {
             return $conn;
         }
     }
 
-    public function userCheck($username){
-        $conn = $this->DBconnect();
+    public function userCheck($username)
+    {
+        $conn = $this->dataBaseConnect();
         $sql = "SELECT username FROM Users where username = '$username'";
         $result = $conn->query($sql);
         $users = $result->fetch_all(MYSQLI_ASSOC);
+
         if ($users){
                 $status = "exists";
-            }
-        else $status = "not exists";
+        } else {
+            $status = "not exists";
+        }
         return $status;
     }
 
-    protected function authentication($username, $password){
-        $conn = $this->DBconnect();
-        $sql = "SELECT username, password, role FROM Users"; // TODO:: change it to the "WHERE" logic
+    protected function authentication($username, $password)
+    {
+        $conn = $this->dataBaseConnect();
+        $sql = "SELECT username, password, role FROM Users where username='$username'";
         $result = $conn->query($sql);
         $users = $result->fetch_all(MYSQLI_ASSOC);
-        foreach ($users as $value){
 
-          if ($value['username'] == $username && $value['password'] == $password ){
-              $status = $value['role'];
-              return $status;
-          }
+        if ($users[0]['password'] == $password){
+              $status = $users[0]['role'];
+        } else {
+            $status = "not authorized";
         }
-        $status = "not authorized";
+
         return $status;
     }
-    protected function registration($username, $password){
-        $conn = $this->DBconnect();
+
+    protected function registration($username, $password)
+    {
+        $conn = $this->dataBaseConnect();
         $sql = "INSERT INTO Users (username, password) VALUES ('$username', '$password')";
 
         if ($conn->query($sql) === TRUE) {
-            echo "<script type='text/javascript'> alert('$username you registered succesfully'); window.location.href = 'login'; </script>";
+            $alert = "$username you registered succesfully";
         } else {
-            echo "<script type='text/javascript'> alert('something went wrong'); window.location.href = 'register'; </script>";
+            $alert = "something went wrong";
         }
+
+        echo "<script type='text/javascript'> alert('$alert'); window.location.href = 'login'; </script>";
     }
 
-    public function adminpanel($access){
-        $conn = $this->DBconnect();
+    public function adminpanel($access)
+    {
+        $conn = $this->dataBaseConnect();
         $sql = "SELECT id, username, role FROM Users";
         $result = $conn->query($sql);
         $users = $result->fetch_all(MYSQLI_ASSOC);
+
         foreach ($users as $value){
             $id = $value['id'];
             $username = $value['username'];
             $role = $value['role'];
-            echo  "
-                    <tr>
+            echo  " <tr>
                     <td> $id </td>
                     <td> $username </td>
                     <td> $role   </td>
                     <td><a href='/user/edit/$id'>edit</a></td>";
-            if ($access=='administrator') { echo "<td><a href ='/user/delete/$id'> delete</a></td> </tr>"; }
-            else { echo "<td><button disabled>delete</button></td> </tr>"; }
 
-
+            if ($access=='administrator') {
+                echo "<td><a href ='/user/delete/$id'> delete</a></td> </tr>";
+            }else {
+                echo "<td><button disabled>delete</button></td> </tr>";
+            }
         }
 
     }
 
-    protected function delete($id){
-        $conn = $this->DBconnect();
+    protected function delete($id)
+    {
+        $conn = $this->dataBaseConnect();
         $sql = "Delete FROM Users where id='$id'";
+
         if ($conn->query($sql) === TRUE) {
             echo "<script type='text/javascript'> alert('Record Deleted successfully'); window.location.href = '../../adminpanel'; </script>";
         } else {
             echo "Error deleting record: " . $conn->error;
         }
+
         $conn->close();
     }
 
-    protected function edit($id, $field, $value){
-        $conn = $this->DBconnect();
+    protected function edit($id, $field, $value)
+    {
+        $conn = $this->dataBaseConnect();
         $sql = "UPDATE Users SET $field='$value' WHERE id='$id'";
+
         if ($conn->query($sql) !== TRUE) {
              echo "Error Updating record: " . $conn->error;
         }
