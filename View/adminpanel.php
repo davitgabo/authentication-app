@@ -13,7 +13,7 @@ include_once "/home/davitgabashvili/Projects/lesson1/Portal_OOP/Model/Users.php"
     </head>
     <body>
         <header>
-            <a href="logout">Log out</a>
+            <a href="/logout">Log out</a>
             <h1 class="Header" id="WebsiteHeader"> OKI BAXTADZE's Website </h1>
             <hr/>
             <h2>Admin panel</h2>

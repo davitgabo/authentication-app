@@ -13,7 +13,7 @@
     </head>
 <body>
     <header>
-        <a href="logout">Log out</a>
+        <a href="/logout">Log out</a>
         <h1 class="Header" id="WebsiteHeader"> OKI BAXTADZE's Website </h1> 
         <hr/>
         <nav>
